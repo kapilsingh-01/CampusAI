@@ -25,7 +25,7 @@ function PDFUploader() {
             formData.append("pdf", file);
 
             const response = await axios.post(
-                "http://localhost:5000/api/upload",
+    `${import.meta.env.VITE_API_URL}/api/upload`,
                 formData,
                 {
                     headers: {
