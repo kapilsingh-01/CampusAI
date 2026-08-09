@@ -1,36 +1,33 @@
 import { Link, useNavigate } from "react-router-dom";
-
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
-
     const navigate = useNavigate();
+    const { currentUser } = useAuth();
 
-    const currentUser = JSON.parse(
-    localStorage.getItem("currentUser")
-);
+    async function logout() {
+        const confirmLogout = window.confirm(
+            "Are you sure you want to logout?"
+        );
 
-   function logout() {
+        if (!confirmLogout) return;
 
-    const confirmLogout = window.confirm(
-        "Are you sure you want to logout?"
-    );
-
-    if (!confirmLogout) return;
-
-    localStorage.removeItem("currentUser");
-
-    navigate("/login");
-
-}
+        try {
+            await signOut(auth);
+            navigate("/login");
+        } catch (error) {
+            console.error("Logout error:", error);
+            alert("Logout failed. Please try again.");
+        }
+    }
 
     return (
-
         <nav className="navbar">
 
             <h2 className="logo">
-
                 CampusAI
-
             </h2>
 
             <div className="nav-links">
@@ -39,70 +36,66 @@ function Navbar() {
 
                 <Link to="/about">About</Link>
 
-                {
+                {currentUser && (
+                    <>
+                        <Link to="/dashboard">
+                            Dashboard
+                        </Link>
 
-                    currentUser && (
+                        <Link to="/notes">
+                            Notes
+                        </Link>
 
-                        <>
+                        <Link to="/calendar">
+                            Calendar
+                        </Link>
 
-                            <Link to="/dashboard">Dashboard</Link>
+                        <Link to="/attendance">
+                            Attendance
+                        </Link>
 
-                           
+                        <Link to="/exams">
+                            Exams
+                        </Link>
 
-                           
-                            <Link to="/notes">Notes</Link>
+                        <Link to="/assistant">
+                            AI Assistant
+                        </Link>
 
-                            <Link to="/calendar">Calendar</Link>
+                        <Link to="/notifications">
+                            Notifications
+                        </Link>
 
-                            <Link to="/attendance">Attendance</Link>
+                        <span className="welcome-user">
+                            👋 Welcome,{" "}
+                            {currentUser.displayName ||
+                                currentUser.email?.split("@")[0]}
+                        </span>
 
-                            <Link to="/exams">Exams</Link>
+                        <button
+                            className="logout-btn"
+                            onClick={logout}
+                        >
+                            🚪 Logout
+                        </button>
+                    </>
+                )}
 
-                            <Link to="/assistant">AI Assistant</Link>
+                {!currentUser && (
+                    <>
+                        <Link to="/login">
+                            Login
+                        </Link>
 
-                            <Link to="/notifications">Notifications</Link>
-
-                           <span className="welcome-user">
-    👋 Welcome, {currentUser?.name}
-</span>
-
-                            <button
-                                className="logout-btn"
-                                onClick={logout}
-                            >
-
-                                🚪 Logout
-
-                            </button>
-
-                        </>
-
-                    )
-
-                }
-
-                {
-
-                    !currentUser && (
-
-                        <>
-
-                            <Link to="/login">Login</Link>
-
-                            <Link to="/register">Register</Link>
-
-                        </>
-
-                    )
-
-                }
+                        <Link to="/register">
+                            Register
+                        </Link>
+                    </>
+                )}
 
             </div>
-
         </nav>
-
     );
-
 }
 
 export default Navbar;
