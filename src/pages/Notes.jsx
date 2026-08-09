@@ -14,19 +14,19 @@ function Notes() {
     const [notes, setNotes] = useState([]);
 
     const [subject, setSubject] = useState("");
-
     const [title, setTitle] = useState("");
-
     const [content, setContent] = useState("");
 
     const [search, setSearch] = useState("");
 
+    const [selectedNote, setSelectedNote] = useState(null);
+
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
 
         if (currentUser) {
-
             loadNotes();
-
         }
 
     }, [currentUser]);
@@ -35,15 +35,24 @@ function Notes() {
 
         try {
 
+            setLoading(true);
+
             const data = await getNotes(currentUser.uid);
 
             setNotes(data);
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Error loading notes:",
+                error
+            );
 
             alert("Unable to load notes.");
+
+        } finally {
+
+            setLoading(false);
 
         }
 
@@ -51,7 +60,15 @@ function Notes() {
 
     async function addNewNote() {
 
-        if (!subject || !title || !content) {
+        const cleanSubject = subject.trim();
+        const cleanTitle = title.trim();
+        const cleanContent = content.trim();
+
+        if (
+            !cleanSubject ||
+            !cleanTitle ||
+            !cleanContent
+        ) {
 
             alert("Please fill all fields.");
 
@@ -63,31 +80,40 @@ function Notes() {
 
             uid: currentUser.uid,
 
-            subject,
+            subject: cleanSubject,
 
-            title,
+            title: cleanTitle,
 
-            content
+            content: cleanContent
 
         };
 
         try {
+
+            setLoading(true);
 
             await addNote(newNote);
 
             await loadNotes();
 
             setSubject("");
-
             setTitle("");
-
             setContent("");
+
+            alert("Note saved successfully.");
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Error saving note:",
+                error
+            );
 
             alert("Unable to save note.");
+
+        } finally {
+
+            setLoading(false);
 
         }
 
@@ -99,33 +125,78 @@ function Notes() {
             "Delete this note?"
         );
 
-        if (!confirmDelete) return;
+        if (!confirmDelete) {
+            return;
+        }
 
         try {
 
+            setLoading(true);
+
             await deleteNote(id);
+
+            if (
+                selectedNote &&
+                selectedNote.id === id
+            ) {
+
+                setSelectedNote(null);
+
+            }
 
             await loadNotes();
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Error deleting note:",
+                error
+            );
 
             alert("Unable to delete note.");
+
+        } finally {
+
+            setLoading(false);
 
         }
 
     }
 
-    const filteredNotes = notes.filter((item) =>
+    function handleOpenNote(note) {
 
-        item.subject.toLowerCase().includes(search.toLowerCase()) ||
+        setSelectedNote(note);
 
-        item.title.toLowerCase().includes(search.toLowerCase()) ||
+    }
 
-        item.content.toLowerCase().includes(search.toLowerCase())
+    function handleCloseNote() {
 
-    );
+        setSelectedNote(null);
+
+    }
+
+    const searchText = search
+        .trim()
+        .toLowerCase();
+
+    const filteredNotes = notes.filter((item) => {
+
+        const itemSubject =
+            String(item.subject || "").toLowerCase();
+
+        const itemTitle =
+            String(item.title || "").toLowerCase();
+
+        const itemContent =
+            String(item.content || "").toLowerCase();
+
+        return (
+            itemSubject.includes(searchText) ||
+            itemTitle.includes(searchText) ||
+            itemContent.includes(searchText)
+        );
+
+    });
 
     return (
 
@@ -137,7 +208,9 @@ function Notes() {
                 type="text"
                 placeholder="🔍 Search Notes"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) =>
+                    setSearch(e.target.value)
+                }
             />
 
             <div className="note-form">
@@ -146,82 +219,143 @@ function Notes() {
                     type="text"
                     placeholder="Subject"
                     value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
+                    onChange={(e) =>
+                        setSubject(e.target.value)
+                    }
                 />
 
                 <input
                     type="text"
                     placeholder="Note Title"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={(e) =>
+                        setTitle(e.target.value)
+                    }
                 />
 
                 <textarea
                     placeholder="Write your notes here..."
                     value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                    onChange={(e) =>
+                        setContent(e.target.value)
+                    }
                 />
 
-                <button onClick={addNewNote}>
-
-                    Save Note
-
+                <button
+                    onClick={addNewNote}
+                    disabled={loading}
+                >
+                    {loading
+                        ? "Saving..."
+                        : "Save Note"}
                 </button>
 
-                                  </div>
+            </div>
 
-            {
-
-                filteredNotes.length === 0 ?
+            {loading && notes.length === 0 ? (
 
                 <p className="empty">
-
-                    No Notes Found.
-
+                    Loading notes...
                 </p>
 
-                :
+            ) : filteredNotes.length === 0 ? (
+
+                <p className="empty">
+                    No Notes Found.
+                </p>
+
+            ) : (
 
                 <div className="note-list">
 
-                    {
+                    {filteredNotes.map((item) => (
 
-                        filteredNotes.map((item) => (
+                        <div
+                            className="note-card"
+                            key={item.id}
+                        >
 
-                            <div
-                                className="note-card"
-                                key={item.id}
-                            >
+                            <h2>
+                                📚 {item.subject}
+                            </h2>
 
-                                <h2>📚 {item.subject}</h2>
+                            <h3>
+                                📝 {item.title}
+                            </h3>
 
-                                <h3>📝 {item.title}</h3>
+                            <p>
+                                {item.content.length > 150
+                                    ? `${item.content.substring(
+                                        0,
+                                        150
+                                    )}...`
+                                    : item.content}
+                            </p>
 
-                                <p>{item.content}</p>
+                            <div className="note-actions">
+
+                                <button
+                                    onClick={() =>
+                                        handleOpenNote(item)
+                                    }
+                                    disabled={loading}
+                                >
+                                    📖 Open Note
+                                </button>
 
                                 <button
                                     className="delete-btn"
-                                    onClick={() => handleDelete(item.id)}
+                                    onClick={() =>
+                                        handleDelete(item.id)
+                                    }
+                                    disabled={loading}
                                 >
-
                                     🗑 Delete
-
                                 </button>
 
                             </div>
 
-                        ))
+                        </div>
 
-                    }
+                    ))}
 
                 </div>
 
-            }
+            )}
+
+            {selectedNote && (
+
+                <div className="note-viewer">
+
+                    <div className="note-viewer-content">
+
+                        <h2>
+                            📚 {selectedNote.subject}
+                        </h2>
+
+                        <h3>
+                            📝 {selectedNote.title}
+                        </h3>
+
+                        <div className="note-full-content">
+                            {selectedNote.content}
+                        </div>
+
+                        <button
+                            onClick={handleCloseNote}
+                        >
+                            ✖ Close Note
+                        </button>
+
+                    </div>
+
+                </div>
+
+            )}
 
         </div>
 
     );
-
 }
 
 export default Notes;
