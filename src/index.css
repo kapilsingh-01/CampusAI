@@ -3021,3 +3021,269 @@ iframe {
         max-width: 95%;
     }
 }
+
+/* =========================================================
+   MOBILE COMPACT UI
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .nav-links {
+        gap: 6px 10px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .welcome-user {
+        font-size: 12px;
+    }
+
+    .logout-btn {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+
+    /* Pages */
+
+    .dashboard,
+    .classes-page,
+    .assignments-page,
+    .notes-page,
+    .assistant-page,
+    .settings-page {
+        padding: 16px 10px;
+    }
+
+    /* Headings */
+
+    .dashboard-greeting {
+        font-size: 23px;
+    }
+
+    .dashboard-subtitle {
+        font-size: 13px;
+    }
+
+    .notes-page h1,
+    .assistant-page h1 {
+        font-size: 26px;
+    }
+
+    /* Cards */
+
+    .dashboard-grid,
+    .class-list,
+    .assignment-list,
+    .exam-list,
+    .note-list {
+        gap: 10px;
+    }
+
+    .dashboard-card,
+    .class-card,
+    .assignment-card,
+    .exam-card,
+    .note-card {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .dashboard-card h2,
+    .class-card h2,
+    .assignment-card h2,
+    .exam-card h2,
+    .note-card h2 {
+        font-size: 17px;
+    }
+
+    .dashboard-card p,
+    .class-card p,
+    .assignment-card p,
+    .exam-card p,
+    .note-card p {
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    /* Forms */
+
+    .add-class,
+    .assignment-form,
+    .exam-form {
+        gap: 8px;
+    }
+
+    .add-class input,
+    .add-class select,
+    .assignment-form input,
+    .assignment-form select,
+    .exam-form input {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
+
+    .add-class button,
+    .assignment-form button,
+    .exam-form button {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    /* Notes */
+
+    .note-form {
+        margin: 16px auto;
+        gap: 9px;
+    }
+
+    .note-form input,
+    .note-form textarea {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
+
+    .note-form textarea {
+        min-height: 110px;
+    }
+
+    .note-form button {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .note-actions {
+        gap: 7px;
+    }
+
+    .note-actions button {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    /* AI */
+
+    .chat-box {
+        min-height: 330px;
+        padding: 10px;
+    }
+
+    .user-message,
+    .ai-message {
+        padding: 9px 11px;
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .chat-input {
+        gap: 7px;
+    }
+
+    .chat-input input {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
+
+    .chat-input button {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    /* Auth */
+
+    .auth-card {
+        width: calc(100% - 24px);
+        padding: 20px 16px;
+    }
+
+    .auth-input,
+    .auth-btn {
+        padding: 9px 10px;
+        font-size: 13px;
+    }
+
+    /* Buttons */
+
+    button {
+        font-size: 13px;
+    }
+}
+
+
+/* Extra small phones */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 8px 9px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .nav-links {
+        gap: 5px 8px;
+    }
+
+    .nav-links a {
+        font-size: 11px;
+    }
+
+    .dashboard,
+    .classes-page,
+    .assignments-page,
+    .notes-page,
+    .assistant-page,
+    .settings-page {
+        padding: 13px 8px;
+    }
+
+    .dashboard-greeting {
+        font-size: 21px;
+    }
+
+    .notes-page h1,
+    .assistant-page h1 {
+        font-size: 23px;
+    }
+
+    .dashboard-card,
+    .class-card,
+    .assignment-card,
+    .exam-card,
+    .note-card {
+        padding: 11px;
+    }
+
+    .dashboard-card h2,
+    .class-card h2,
+    .assignment-card h2,
+    .exam-card h2,
+    .note-card h2 {
+        font-size: 15px;
+    }
+
+    .dashboard-card p,
+    .class-card p,
+    .assignment-card p,
+    .exam-card p,
+    .note-card p {
+        font-size: 12px;
+    }
+
+    .chat-box {
+        min-height: 280px;
+        padding: 8px;
+    }
+}
