@@ -2632,3 +2632,392 @@ body {
     background:#1d4ed8;
 
 }
+
+/* =========================================================
+   MOBILE RESPONSIVE FIX
+   ========================================================= */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+* {
+    min-width: 0;
+}
+
+/* -----------------------------
+   Navbar
+----------------------------- */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        width: 100%;
+        padding: 15px 16px;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .nav-links {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 14px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .welcome-user {
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        overflow-wrap: anywhere;
+    }
+
+    .logout-btn {
+        margin-top: 5px;
+    }
+
+    /* -----------------------------
+       General pages
+    ----------------------------- */
+
+    .page-container {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .dashboard,
+    .classes-page,
+    .assignments-page,
+    .notes-page,
+    .assistant-page,
+    .settings-page {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 16px;
+    }
+
+    /* -----------------------------
+       Headings
+    ----------------------------- */
+
+    .dashboard-greeting {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    .dashboard-subtitle {
+        font-size: 15px;
+    }
+
+    .notes-page h1,
+    .assistant-page h1 {
+        font-size: 34px;
+        line-height: 1.2;
+    }
+
+    /* -----------------------------
+       Dashboard
+    ----------------------------- */
+
+    .dashboard-grid {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .dashboard-stats {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .stat-box,
+    .streak-card,
+    .study-streak .stat-box {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .dashboard-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* -----------------------------
+       Classes
+    ----------------------------- */
+
+    .add-class {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .add-class input,
+    .add-class select {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .add-class button {
+        width: 100%;
+    }
+
+    .class-list {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .class-card {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        font-size: 18px;
+    }
+
+    /* -----------------------------
+       Assignments
+    ----------------------------- */
+
+    .assignment-form {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .assignment-form input,
+    .assignment-form select,
+    .assignment-form button {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .assignment-list {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* -----------------------------
+       Exams
+    ----------------------------- */
+
+    .exam-form {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .exam-form input,
+    .exam-form button {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .exam-list {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .exam-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* -----------------------------
+       Notes
+    ----------------------------- */
+
+    .note-form {
+        width: 100%;
+        max-width: 100%;
+        margin: 25px auto;
+    }
+
+    .note-form input,
+    .note-form textarea,
+    .note-form button {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .note-list {
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .note-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .note-actions {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .note-actions button {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    /* -----------------------------
+       AI Assistant
+    ----------------------------- */
+
+    .chat-box {
+        width: 100%;
+        max-width: 100%;
+        min-height: 400px;
+        height: auto;
+        padding: 15px;
+    }
+
+    .user-message,
+    .ai-message {
+        max-width: 90%;
+        overflow-wrap: anywhere;
+    }
+
+    .chat-input {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .chat-input input,
+    .chat-input button {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .pdf-uploader,
+    .pdf-dropzone {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .ai-buttons {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .summary-btn {
+        min-width: 0;
+        width: 100%;
+    }
+
+    /* -----------------------------
+       Authentication
+    ----------------------------- */
+
+    .auth-card {
+        width: calc(100% - 32px);
+        max-width: 420px;
+        margin: 16px auto;
+    }
+
+    .auth-input,
+    .auth-btn {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* -----------------------------
+       Feature cards
+    ----------------------------- */
+
+    .features {
+        width: 100%;
+        padding: 0 16px;
+        gap: 16px;
+    }
+
+    .feature-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* -----------------------------
+       Buttons
+    ----------------------------- */
+
+    button {
+        max-width: 100%;
+    }
+}
+
+/* Extra small phones */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 12px 10px;
+    }
+
+    .nav-links {
+        gap: 8px 10px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .dashboard,
+    .classes-page,
+    .assignments-page,
+    .notes-page,
+    .assistant-page,
+    .settings-page {
+        padding: 20px 12px;
+    }
+
+    .dashboard-greeting {
+        font-size: 25px;
+    }
+
+    .notes-page h1,
+    .assistant-page h1 {
+        font-size: 30px;
+    }
+
+    .user-message,
+    .ai-message {
+        max-width: 95%;
+    }
+}
