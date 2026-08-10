@@ -3575,3 +3575,92 @@ iframe {
     }
 
 }
+
+/* =========================================================
+   HOME MOBILE - FIX HERO / NAVBAR OVERLAP
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* Keep navbar completely above home content */
+    .navbar {
+        position: relative;
+        z-index: 1000;
+    }
+
+    /* Give home content its own clean flow */
+    .home,
+    .home-page {
+        position: relative;
+        z-index: 1;
+        padding-top: 12px !important;
+    }
+
+    /* Hero must NOT overlap navbar */
+    .hero {
+        position: relative !important;
+        z-index: 1 !important;
+        margin-top: 10px !important;
+        padding: 12px 8px !important;
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    /* Hero heading */
+    .hero h1 {
+        position: relative;
+        z-index: 2;
+        margin: 8px 0 !important;
+    }
+
+    /* Hero text */
+    .hero p {
+        position: relative;
+        z-index: 2;
+        margin: 6px 0 12px !important;
+    }
+
+    /* Hero buttons */
+    .hero button,
+    .hero .btn,
+    .hero a {
+        position: relative !important;
+        z-index: 2;
+    }
+
+    /* Feature section should start after hero */
+    .features-grid,
+    .feature-grid {
+        position: relative;
+        z-index: 1;
+        margin-top: 12px !important;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .home,
+    .home-page {
+        padding-top: 8px !important;
+    }
+
+    .hero {
+        margin-top: 8px !important;
+        padding: 10px 6px !important;
+    }
+
+    .hero h1 {
+        font-size: 24px !important;
+    }
+
+    .hero p {
+        font-size: 13px !important;
+    }
+
+}
