@@ -14,12 +14,20 @@ function Hero() {
       </p>
 
       <div className="buttons">
-        <button>Get Started</button>
+  <button>Get Started</button>
 
-        <button className="secondary">
-          Learn More
-        </button>
-      </div>
+  <button className="secondary">
+    Learn More
+  </button>
+
+  <a
+    href="/CampusAI.apk"
+    download
+    className="download-app-btn"
+  >
+    📱 Download CampusAI
+  </a>
+</div>
 
       <div className="features">
 
